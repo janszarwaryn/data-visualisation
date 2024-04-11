@@ -3,9 +3,7 @@
     <v-card-title class="d-flex align-center pe-2">
       <v-icon icon="mdi-video-input-component"></v-icon> &nbsp;
       Customer Data
-
       <v-spacer></v-spacer>
-
 
       <v-text-field
         v-model="search"
@@ -52,6 +50,7 @@
                     label="Status">
                   </v-select>
                 </v-col>
+
                 <v-col cols="12" sm="6">
                   <v-select
                     v-model="editedItem.attachments"
@@ -59,7 +58,9 @@
                     label="Attachments">
                   </v-select>
                 </v-col>
+
               </v-row>
+
               <v-row>
                 <v-col cols="12" sm="12">
                   <v-textarea
@@ -69,6 +70,7 @@
                   </v-textarea>
                 </v-col>
               </v-row>
+
               <v-row>
                 <!-- Zaktualizowane pole dla Interaction Date -->
                 <v-col cols="12" sm="6">
@@ -78,7 +80,6 @@
                     type="date">
                   </v-text-field>
                 </v-col>
-
 
                 <v-col cols="12" sm="6">
                   <v-text-field
@@ -114,16 +115,11 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
-
-
-
     </v-card-title>
 
     <v-divider></v-divider>
 
     <v-row>
-
       <v-col cols="12" sm="2">
         <v-autocomplete
           v-model="filters.assignedTO"
@@ -205,27 +201,27 @@
 
       <template v-slot:item.actions="{ item }">
         <v-row>
-        <v-icon
-          small
-          class="mr-2"
-          @click="editItem(item)"
-        >
-          mdi-pencil
-        </v-icon>
-        <v-icon
-          small
-          class="mr-2"
-          @click="showDetails(item)"
-        >
-          mdi-eye
-        </v-icon>
-        <v-icon
-          class="mr-2"
-          small
-          @click="deleteItem(item)"
-        >
-          mdi-delete
-        </v-icon>
+          <v-icon
+            small
+            class="mr-2"
+            @click="editItem(item)"
+          >
+            mdi-pencil
+          </v-icon>
+          <v-icon
+            small
+            class="mr-2"
+            @click="showDetails(item)"
+          >
+            mdi-eye
+          </v-icon>
+          <v-icon
+            class="mr-2"
+            small
+            @click="deleteItem(item)"
+          >
+            mdi-delete
+          </v-icon>
         </v-row>
 
       </template>
@@ -307,15 +303,15 @@ export default {
         },
       })),
       headers: [
-        { align: 'start', key: 'id', title: 'ID', sortable: true },
-        { key: 'assignedTO', title: 'Assigned To', sortable: true },
-        { key: 'contact_channel', title: 'Contact Channel', sortable: true },
-        { key: 'status', title: 'Status', sortable: true },
-        { key: 'attachments', title: 'Attachments' , sortable: true},
-        { key: 'last_comment', title: 'Last Comment' , sortable: true},
-        { key: 'interactionDate', title: 'Interaction Date', sortable: true },
-        { key: 'dueDate', title: 'Due Date', sortable: true },
-        { align: 'start', key: 'actions', title: 'Actions', sortable: false },
+        {align: 'start', key: 'id', title: 'ID', sortable: true},
+        {key: 'assignedTO', title: 'Assigned To', sortable: true},
+        {key: 'contact_channel', title: 'Contact Channel', sortable: true},
+        {key: 'status', title: 'Status', sortable: true},
+        {key: 'attachments', title: 'Attachments', sortable: true},
+        {key: 'last_comment', title: 'Last Comment', sortable: true},
+        {key: 'interactionDate', title: 'Interaction Date', sortable: true},
+        {key: 'dueDate', title: 'Due Date', sortable: true},
+        {align: 'start', key: 'actions', title: 'Actions', sortable: false},
       ],
       modalOpen: false,
       editDialog: false,
@@ -350,27 +346,26 @@ export default {
     this.last_comment = [...new Set(this.items.map(item => item.last_comment))];
   },
   watch: {
-    'filters.assignedTO': function(newVal) {
+    'filters.assignedTO': function (newVal) {
       console.log('Filter assignedTO changed:', newVal);
       this.applyFilters();
     },
-    'filters.contact_channel': function(newVal) {
+    'filters.contact_channel': function (newVal) {
       console.log('Filter contact_channel changed:', newVal);
       this.applyFilters();
     },
-    'filters.status': function(newVal) {
+    'filters.status': function (newVal) {
       console.log('Filter status changed:', newVal);
       this.applyFilters();
     },
-    'filters.interactionDate.start': function(newVal) {
+    'filters.interactionDate.start': function (newVal) {
       console.log('Filter interactionDate.start changed:', newVal);
       this.applyFilters();
     },
-    'filters.interactionDate.end': function(newVal) {
+    'filters.interactionDate.end': function (newVal) {
       console.log('Filter interactionDate.end changed:', newVal);
       this.applyFilters();
     },
-    // Dodaj obserwatory dla innych filtrów, jeśli są potrzebne
   },
   methods: {
     truncateComment(comment) {
@@ -425,7 +420,6 @@ export default {
       this.editedIndex = this.items.indexOf(item);
       this.editedItem = Object.assign({}, item);
 
-      // Rozdzielenie daty i czasu dla interactionDate i dueDate
       let [interactionDate, interactionTime] = item.interactionDate.split(' ');
       this.editedItem.interactionDate = interactionDate;
       this.editedItem.interactionTime = interactionTime;
@@ -454,8 +448,8 @@ export default {
           id: '',
           contact_channel: '',
           status: '',
-          attachments:'',
-          last_comment:'',
+          attachments: '',
+          last_comment: '',
           interactionDate: '',
           dueDate: '',
           interactionTime: '',
@@ -499,10 +493,10 @@ export default {
 
 
 .v-data-table th {
-max-width: 200px !important;
+  max-width: 200px !important;
 }
 
-.v-data-table .v-row{
+.v-data-table .v-row {
   flex-wrap: unset;
 }
 
