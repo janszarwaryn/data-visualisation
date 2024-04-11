@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <v-main>
-      <data-visualisation></data-visualisation>
       <router-view />
     </v-main>
 
