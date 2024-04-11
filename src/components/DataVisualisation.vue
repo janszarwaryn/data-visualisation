@@ -229,6 +229,21 @@
         </v-row>
 
       </template>
+
+      <template v-slot:item.last_comment="{ item }">
+        <div>
+    <span v-if="!item.expandedComment">
+      {{ truncateComment(item.last_comment) }}
+    </span>
+          <span v-else>
+      {{ item.last_comment }}
+    </span>
+          <v-icon small @click.stop="toggleComment(item)">
+            {{ item.expandedComment ? 'mdi-chevron-up' : 'mdi-chevron-down' }}
+          </v-icon>
+        </div>
+      </template>
+
     </v-data-table>
 
     <v-dialog v-model="modalOpen" persistent max-width="600px">
@@ -358,6 +373,14 @@ export default {
     // Dodaj obserwatory dla innych filtrów, jeśli są potrzebne
   },
   methods: {
+    truncateComment(comment) {
+      const maxLength = 100; // Adjust as needed
+      return comment.length > maxLength ? comment.substr(0, maxLength) + '...' : comment;
+    },
+
+    toggleComment(item) {
+      item.expandedComment = !item.expandedComment;
+    },
     applyFilters() {
       this.items = jsonData.filter(item => {
         console.log("Przed filtracją", item);
@@ -467,6 +490,14 @@ export default {
 };
 </script>
 <style scoped>
+.v-data-table tr {
+  max-height: 100px; /* Dostosuj według potrzeb */
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+}
+
+
 .v-data-table th {
 max-width: 200px !important;
 }
