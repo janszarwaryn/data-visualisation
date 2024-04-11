@@ -75,16 +75,16 @@
                   <v-text-field
                     v-model="editedItem.interactionDate"
                     label="Interaction Date"
-                    type="date"> <!-- Umożliwia wpisywanie daty w formacie YYYY-MM-DD -->
+                    type="date">
                   </v-text-field>
                 </v-col>
 
-                <!-- Zaktualizowane pole dla Due Date -->
+
                 <v-col cols="12" sm="6">
                   <v-text-field
                     v-model="editedItem.dueDate"
                     label="Due Date"
-                    type="date"> <!-- Umożliwia wpisywanie daty w formacie YYYY-MM-DD -->
+                    type="date">
                   </v-text-field>
                 </v-col>
 
@@ -92,7 +92,7 @@
                   <v-text-field
                     v-model="editedItem.interactionTime"
                     label="Interaction Time"
-                    type="time"> <!-- Umożliwia wpisywanie daty w formacie YYYY-MM-DD -->
+                    type="time">
                   </v-text-field>
                 </v-col>
 
@@ -100,7 +100,7 @@
                   <v-text-field
                     v-model="editedItem.dueTime"
                     label="Due Time"
-                    type="time"> <!-- Umożliwia wpisywanie daty w formacie YYYY-MM-DD -->
+                    type="time">
                   </v-text-field>
                 </v-col>
               </v-row>
@@ -123,7 +123,7 @@
     <v-divider></v-divider>
 
     <v-row>
-      <!-- Filtrowanie na podstawie przydzielonej osoby -->
+
       <v-col cols="12" sm="2">
         <v-autocomplete
           v-model="filters.assignedTO"
@@ -155,9 +155,7 @@
           @change="applyFilters"
         ></v-autocomplete>
       </v-col>
-      <!-- Powtórz dla innych kolumn wymagających filtrowania -->
 
-      <!-- Filtrowanie zakresu dat dla 'Interaction Date' -->
       <v-col cols="12" sm="6">
         <v-row>
           <v-col cols="6">
@@ -265,7 +263,7 @@
 </template>
 
 <script>
-import jsonData from '../data/MOCK_DATA.json'; // Adjust the path as necessary
+import jsonData from '../data/MOCK_DATA.json'; // Adjust the path as necessary theres test json data with low size
 
 export default {
   data() {
@@ -364,16 +362,10 @@ export default {
       this.items = jsonData.filter(item => {
         console.log("Przed filtracją", item);
 
-        // Warunek dla assignedTO
         if (this.filters.assignedTO.length && !this.filters.assignedTO.includes(item.assignedTO)) return false;
-
-        // Warunek dla contact_channel
         if (this.filters.contact_channel.length && !this.filters.contact_channel.includes(item.contact_channel)) return false;
-
-        // Warunek dla status
         if (this.filters.status.length && !this.filters.status.includes(item.status)) return false;
 
-        // Warunek dla interactionDate
         let interactionDate = new Date(item.interaction_creation_date);
         let filterStartDate = this.filters.interactionDate.start ? new Date(this.filters.interactionDate.start) : new Date('1970-01-01');
         let filterEndDate = this.filters.interactionDate.end ? new Date(this.filters.interactionDate.end) : new Date('2999-12-31');
