@@ -485,7 +485,7 @@ export default {
 </script>
 <style scoped>
 .v-data-table tr {
-  max-height: 100px; /* Dostosuj według potrzeb */
+  max-height: 100px;
   overflow: hidden;
   display: block;
   text-overflow: ellipsis;
